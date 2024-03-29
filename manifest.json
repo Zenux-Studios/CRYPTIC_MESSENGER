@@ -1,0 +1,19 @@
+{
+    "manifest_version": 3,
+    "name": "My First Extension",
+    "version": "1.0",
+    "description": "The first extension that I made.",
+    "action": {
+        "default_popup": "popup.html",
+        "default_icon": {
+            "128":"icon120.png",
+            "700":"icon700.png"
+        }
+    },
+    "content_scripts": [
+        {
+            "matches": ["https://web.whatsapp.com/*"],
+            "js": ["content.js"]
+        }
+    ]
+}
