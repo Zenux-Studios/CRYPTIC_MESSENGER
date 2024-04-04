@@ -6,10 +6,16 @@
     "action": {
         "default_popup": "popup.html",
         "default_icon": {
-            "128":"icon120.png",
-            "700":"icon700.png"
+            "16":"icon/icon16.png",
+            "32":"icon/icon32.png",
+            "48":"icon/icon48.png",
+            "128":"icon/icon128.png"
         }
     },
+    "permissions": [
+        "activeTab",
+        "scripting"
+    ],
     "content_scripts": [
         {
             "matches": ["https://web.whatsapp.com/*"],
