@@ -86,7 +86,8 @@ function begin() {
             
             mess = encrypt(inp)
             
-            if (link)   mess += '@@AA'
+            if (link||document.querySelectorAll('div[style="transform: translateY(0px);"]').length>0)   mess += '@@AA'
+
             textarea.focus()
             document.execCommand('selectAll', false, null)
             document.execCommand('insertText', false, '####')
@@ -105,8 +106,10 @@ function begin() {
             if (x.startsWith('####')) {
                 if (x.endsWith('@@AA')) {
                     x = decrypt(x.slice(4, -4))
-                    return `<a href="${x}">${x}</a>`
+                    return `<a dir="auto" href="${x}" title="${x}" target="_blank">${x}</a>`
                 }
+
+
 
                 return decrypt(x.slice(4))
             }
@@ -177,7 +180,8 @@ function begin() {
             ndiv.firstElementChild.setAttribute('id', 'powersend');
             ndiv.firstElementChild.onclick = ()=>{powersend(decryptionprotocol)};
             ndiv.firstElementChild.firstElementChild.firstElementChild.innerHTML = `<title>powersend</title>
-        <path fill="currentColor" d="M5,8 L19,8 L19,16 L12,16 L12,21 L12,16 L5,16 Z"></path>`
+        <path fill="currentColor" d="
+        M 12 1 C 7.5293 1 3.5 2.3438 3 4 L 3 13 C 3.5 15.041 6 23 12.5 23.5 C 19 23 22 15 22 12 L 22 4 C 22 2 17.4707 1 12 1 Z M 12.5 2 C 17.75 2 20.5 3.4863 20.5 4 L 20.5 12.5 C 20.5 14.5684 18.334 20.2617 13.5 22.1484 L 13 19 L 12 19 L 11.5 22.1484 C 6.666 20.2617 4.5 14.5684 4.5 12.5 L 4.5 4 C 4.5 3.4863 7.25 2 12.5 2 Z M 8.5 5.5 C 7.502 5.5 6.4277 5.9395 5.5 7.5 C 6.4766 6.8203 7.3066 6.5 8 6.5 C 9.3438 6.5 10.0137 8.0742 10.2188 8.2813 C 10.5117 8.5742 10.9863 8.5742 11.2813 8.2813 C 11.5742 7.9883 11.5742 7.5137 11.2813 7.2188 C 11.0977 7.0371 10.2188 5.5 8.5 5.5 Z M 16.5 5.5 C 14.7813 5.5 13.9023 7.0371 13.7188 7.2188 C 13.4258 7.5137 13.4258 7.9883 13.7188 8.2813 C 14.0137 8.5742 14.4883 8.5742 14.7813 8.2813 C 14.9863 8.0742 15.6563 6.5 17 6.5 C 17.6934 6.5 18.5234 6.8203 19.5 7.5 C 18.5723 5.9395 17.498 5.5 16.5 5.5 Z M 8 8.5 C 7.1797 8.5 6.459 8.7969 6 9.25 C 6.459 9.7031 7.1797 10 8 10 C 8.8203 10 9.541 9.7031 10 9.25 C 9.541 8.7969 8.8203 8.5 8 8.5 Z M 17 8.5 C 16.1797 8.5 15.459 8.7969 15 9.25 C 15.459 9.7031 16.1797 10 17 10 C 17.8203 10 18.541 9.7031 19 9.25 C 18.541 8.7969 17.8203 8.5 17 8.5 Z M 5.5 13 L 8 17 L 11.5 17 L 12.5 16 L 13.5 17 L 17 17 L 19.5 13 L 16.5 15.5 L 14.5 15.5 L 13 14 L 12 14 L 10.5 15.5 L 8.5 15.5 Z"></path>`
         }
     }
 

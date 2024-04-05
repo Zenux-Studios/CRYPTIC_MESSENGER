@@ -73,3 +73,5 @@ document.querySelectorAll('div[style="transform: translateY(0px);"]')
 // textarea.dispatchEvent(new Event('change', { bubbles: true }))
 // textarea.dispatchEvent(new Event('Backspace', { bubbles: true }))
 textarea.dispatchEvent(x)
+
+"M5,8 L19,8 L19,16 L12,16 L12,21 L12,16 L5,16 Z"
