@@ -86,7 +86,7 @@ function begin() {
             
             mess = encrypt(inp)
             
-            if (link||document.querySelectorAll('div[style="transform: translateY(0px);"]').length>0)   mess += '@@AA'
+            if (link||document.querySelectorAll('div[style="transform: translateY(0px);"]').length>1)   mess += '@@AA'
 
             textarea.focus()
             document.execCommand('selectAll', false, null)

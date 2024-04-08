@@ -66,6 +66,8 @@ mainEl.querySelector('div[tabindex="-1"]').addEventListener('Wheel', ()=>{consol
 
 
 
+style="transform: translateY(0px);"
+
 document.querySelectorAll('div[style="transform: translateY(0px);"]')
 
 
@@ -75,3 +77,7 @@ document.querySelectorAll('div[style="transform: translateY(0px);"]')
 textarea.dispatchEvent(x)
 
 "M5,8 L19,8 L19,16 L12,16 L12,21 L12,16 L5,16 Z"
+
+
+<div class="_aju5 _aju3" aria-label="Quoted message"><span class="x17y5562 _aju7"></span><div class="_aju8" dir="ltr"><div class="_ajua"><div class="_ahxj xkgnp4b" role=""><span dir="auto" aria-label="" class="_ao3e" style="min-height: 0px;">You</span></div><div class="_ak3v _ak3u" dir="ltr"><span dir="auto" aria-label="" class="quoted-mention _ao3e" style="min-height: 0px;">saerthg
+####ICAgIHNhZXJ0aGc</span></div></div></div><div class="_agto _agtm"><div class="_agtn"></div></div></div>
