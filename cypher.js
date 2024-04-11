@@ -1,22 +1,20 @@
-// document.childNodes[1].childNodes[1].
+console.log("booted in @cypher");
 
+const spam = async () => {
+    let mainEl = document.querySelector("#main");
+    let sndiv = mainEl.querySelector('[aria-label="Send"]');
+    if (!sndiv) return;
+    let num = window.prompt("Enter number of messages to send");
+    num = parseInt(num);
+    if (isNaN(num)) return;
+    for (let i = 0; i < num; i++) {
+        sndiv.click();
+    }
+};
 
-
-
-
-
-
-
-
-
-
-
-
-console.log('booted in @cypher');
-const script = document.createElement('script');
-script.type = 'module';
-script.src = chrome.runtime.getURL('content.js');
-document.body.appendChild(script);
-
-
-
+chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
+    if (request.propagator === "SPAM") {
+        spam();
+    }
+    return true;
+});
