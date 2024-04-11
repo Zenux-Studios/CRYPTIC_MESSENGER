@@ -1,7 +1,7 @@
 // import { encrypt, decrypt } from 'content.js'
 function encrypt(text, n = 1) {
     if (!text || n <= 0) return text;
-    let arr = text.split('');
+    let arr = text.split("");
     let arr1 = [];
     let arr2 = [];
     for (let i = 0; i < n; i++) {
@@ -9,12 +9,12 @@ function encrypt(text, n = 1) {
         arr2 = arr.filter((_, index) => index % 2 === 0);
         arr = arr1.concat(arr2);
     }
-    return arr.join('');
+    return arr.join("");
 }
 
 function decrypt(encryptedText, n = 1) {
     if (!encryptedText || n <= 0) return encryptedText;
-    let arr = encryptedText.split('');
+    let arr = encryptedText.split("");
     let arr1 = [];
     let arr2 = [];
     let middle = Math.floor(encryptedText.length / 2);
@@ -27,9 +27,8 @@ function decrypt(encryptedText, n = 1) {
             if (arr1[j]) arr.push(arr1[j]);
         }
     }
-    return arr.join('');
+    return arr.join("");
 }
-
 
 let text = "This Is A test!";
 let n = 1;

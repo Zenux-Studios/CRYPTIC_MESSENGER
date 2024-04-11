@@ -109,6 +109,7 @@ const begin = async () => {
     };
 
     const manipulate = async () => {
+        console.log("manipulating started");
         let boxno = 0;
         const predecrypt = (x) => {
             if (x.startsWith("####")) {
@@ -158,10 +159,12 @@ const begin = async () => {
             }
         };
         const sendbutt = () => {
-            let sndiv = (
-                mainEl.querySelector('[aria-label="Send"]') ||
-                mainEl.querySelector('[aria-label="Voice message"]')
-            ).parentElement;
+            const bar = mainEl.querySelector("footer");
+            let sndiv =
+                bar.querySelector('[aria-label="Send"]') ||
+                bar.querySelector('[aria-label="Voice message"]');
+            if (!sndiv) return;
+            sndiv = sndiv.parentElement;
             let parent = sndiv.parentElement;
             let ndiv = document.createElement("div");
             parent.appendChild(ndiv);
@@ -186,6 +189,7 @@ const begin = async () => {
          </path>`;
         };
 
+        console.log(mainEl, "manipulating");
         decryptionprotocol();
         if (mainEl.querySelector("#powersend") === null) sendbutt();
         mainEl
@@ -213,6 +217,19 @@ const begin = async () => {
             }
         });
     };
+    const archadd = () => {
+        console.log("archiving");
+        document.querySelector("header").nextSibling;
+        let arctab = document
+            .querySelector("header")
+            .nextSibling.querySelectorAll('div[role="listitem"]');
+        arctab.forEach((conv) => {
+            conv.addEventListener("click", () => {
+                setTimeout(manipulate, 100);
+            });
+            console.log("listening to archived convs");
+        });
+    };
 
     const setup = () => {
         console.log("setingup");
@@ -222,6 +239,11 @@ const begin = async () => {
         convertab.forEach((conv) => {
             conv.addEventListener("click", manipulate);
         });
+        document
+            .querySelector('button[aria-label="Archived "]')
+            .addEventListener("click", () => {
+                setTimeout(archadd, 1000);
+            });
     };
     setup();
     chrome.runtime.onMessage.addListener(
@@ -244,5 +266,5 @@ const cheak = () => {
     }
 };
 
-setTimeout(cheak, 5000);
+setTimeout(cheak, 6000);
 console.log("security on");

@@ -15,6 +15,10 @@ switches.forEach((ele) => {
         });
     });
 });
+const TA = document.getElementById("SPTXT");
+document.getElementById("sub").addEventListener("click", () => {
+    chrome.storage.local.set({ [TA.id]: TA.value });
+});
 
 const buttons = [
     document.getElementById("SPAM"),
@@ -32,4 +36,8 @@ buttons.forEach((pres) => {
         console.log(tabs);
         chrome.tabs.sendMessage(tabs[0].id, { propagator: pres.id });
     });
+});
+
+document.getElementById("test").addEventListener("click", () => {
+    console.log(TA.value);
 });
