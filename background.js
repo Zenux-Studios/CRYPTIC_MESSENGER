@@ -1,10 +1,14 @@
-const dsec = ["DSEC", "SPENC", "DEC"];
+const placeHolderfalse = ["DSEC", "SPENC"];
+const placeHoldetrue = ["DEC"];
 const set = async () => {
     chrome.storage.local.get("set", (res) => {
         if (res.set) return;
         else {
-            dsec.forEach((ele) => {
+            placeHolderfalse.forEach((ele) => {
                 chrome.storage.local.set({ [ele]: false });
+            });
+            placeHoldetrue.forEach((ele) => {
+                chrome.storage.local.set({ [ele]: true });
             });
             chrome.storage.local.set({ set: true });
             console.log("byfrost set");

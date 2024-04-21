@@ -144,6 +144,9 @@ const begin = async () => {
                     if (mess.length == 3) {
                         decryption(mess[0]);
                     }
+                    if (mess.length == 4) {
+                        decryption(mess[1]);
+                    }
                     if (mess.length == 5) {
                         decryption(mess[1]);
                         decryption(mess[2]);
@@ -189,7 +192,6 @@ const begin = async () => {
          </path>`;
         };
 
-        console.log(mainEl, "manipulating");
         decryptionprotocol();
         if (mainEl.querySelector("#powersend") === null) sendbutt();
         mainEl
