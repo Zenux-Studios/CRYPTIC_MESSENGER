@@ -2,7 +2,7 @@ console.log("popup.js loaded");
 
 const switches = [
     document.getElementById("DSEC"),
-    document.getElementById("SPENC"),
+    // document.getElementById("SPENC"),
     document.getElementById("DEC"),
 ];
 
@@ -15,10 +15,10 @@ switches.forEach((ele) => {
         });
     });
 });
-const TA = document.getElementById("SPTXT");
-document.getElementById("sub").addEventListener("click", () => {
-    chrome.storage.local.set({ [TA.id]: TA.value });
-});
+// const TA = document.getElementById("SPTXT");
+// document.getElementById("sub").addEventListener("click", () => {
+//     chrome.storage.local.set({ [TA.id]: TA.value });
+// });
 
 const buttons = [
     document.getElementById("SPAM"),

@@ -13,6 +13,7 @@ const spam = async () => {
 };
 
 chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
+    console.log("Received request", request.propagator);
     if (request.propagator === "SPAM") {
         spam();
     }

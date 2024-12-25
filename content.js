@@ -171,7 +171,8 @@ const begin = async () => {
                 boxno = messboxes.length;
 
                 messboxes.forEach((box) => {
-                    dataref = box.firstChild.dataset.id.slice(5, 17);
+                    let dataref = box.firstChild.dataset.id.slice(5, 17);
+                    // console.log("dataref", dataref);
 
                     let mess = box.querySelectorAll(
                         "span:not(:empty):not(:has(*))"
@@ -180,16 +181,16 @@ const begin = async () => {
                         "span:not(:empty):has(a)"
                     );
                     if (mess.length == 3) {
-                        reference.push[dataref, decryption(mess[0])];
+                        reference.push([dataref, decryption(mess[0])]);
                     }
                     else if (mess.length == 4) {
-                        reference.push[dataref, decryption(mess[1])];
+                        reference.push([dataref, decryption(mess[1])]);
                         // reference.dataref = decryption(mess[1]);
                     }
                     else if (mess.length == 5) {
                         decryption(mess[1]);
                         // reference.dataref = decryption(mess[2]);
-                        reference.push[dataref, decryption(mess[2])];
+                        reference.push([dataref, decryption(mess[2])]);
                     }
                     if (limess.length === 2 && dlsc) {
                         limess[1].childNodes.forEach((node) => {
@@ -207,7 +208,7 @@ const begin = async () => {
                     }
                 });
             }
-            console.log("decoref", reference);
+            // console.log("total refff", reference);
 
         };
         const sendbutt = () => {
