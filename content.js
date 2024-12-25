@@ -103,6 +103,9 @@ const linkage = (unlockedCypher) => {
 }
 
 
+let reference = {};
+
+
 const begin = async () => {
     console.log("cypher loaded");
     const powersend = (func) => {
@@ -160,12 +163,15 @@ const begin = async () => {
             const decryption = (x) => {
                 const manval = predecrypt(x.textContent);
                 if (manval) x.innerHTML = manval;
+                return manval;
             };
             if (deco) {
                 let messboxes = mainEl.querySelectorAll('div[role="row"]');
                 boxno = messboxes.length;
 
                 messboxes.forEach((box) => {
+                    dataref = box.firstChild.dataset.id.slice(5, 17);
+
                     let mess = box.querySelectorAll(
                         "span:not(:empty):not(:has(*))"
                     );
@@ -173,14 +179,14 @@ const begin = async () => {
                         "span:not(:empty):has(a)"
                     );
                     if (mess.length == 3) {
-                        decryption(mess[0]);
+                        reference.dataref = decryption(mess[0]);
                     }
-                    if (mess.length == 4) {
-                        decryption(mess[1]);
+                    else if (mess.length == 4) {
+                        reference.dataref = decryption(mess[1]);
                     }
-                    if (mess.length == 5) {
+                    else if (mess.length == 5) {
                         decryption(mess[1]);
-                        decryption(mess[2]);
+                        reference.dataref = decryption(mess[2]);
                     }
                     if (limess.length === 2 && dlsc) {
                         limess[1].childNodes.forEach((node) => {
@@ -198,6 +204,8 @@ const begin = async () => {
                     }
                 });
             }
+            console.log("decoref", reference);
+
         };
         const sendbutt = () => {
             const bar = mainEl.querySelector("footer");
@@ -258,6 +266,7 @@ const begin = async () => {
                 decryptionprotocol();
             }
         }, 2000);
+        console.log(reference);
     };
     const archadd = () => {
         document.querySelector("header").nextSibling;
