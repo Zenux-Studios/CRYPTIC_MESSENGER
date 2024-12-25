@@ -10,7 +10,6 @@ console.log(verdiction("DSEC"), "@DARKLOD SECURED");
 
 
 
-
 // if(document.execCommand("selectAll", false, null))
 // document.execCommand("insertText", false, "####");
 // let box = mainEl.querySelectorAll('div[role="row"]')[messboxes.length];
@@ -23,6 +22,8 @@ let mainEl = document.querySelector("#main");
 let messboxes = mainEl.querySelectorAll('div[role="row"]');
 
 let box = messboxes[messboxes.length-1];
+
+box.firstChild.dataset.id.slice(5, 17)
 
 // let mess = box.querySelectorAll("span:not(:empty):not(:has(*))");
 let limess = box.querySelectorAll("span:not(:empty):has(a)");
