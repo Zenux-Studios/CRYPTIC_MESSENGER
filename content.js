@@ -103,7 +103,7 @@ const linkage = (unlockedCypher) => {
 }
 
 
-let reference = {};
+let reference = [];
 
 
 const begin = async () => {
@@ -144,6 +144,7 @@ const begin = async () => {
     };
 
     const manipulate = async () => {
+        reference = [];
         let mainEl = document.querySelector("#main");
         if (mainEl.ariaLabel == "DARKNED")
             return;
@@ -163,7 +164,7 @@ const begin = async () => {
             const decryption = (x) => {
                 const manval = predecrypt(x.textContent);
                 if (manval) x.innerHTML = manval;
-                return manval;
+                return x.textContent;
             };
             if (deco) {
                 let messboxes = mainEl.querySelectorAll('div[role="row"]');
@@ -179,14 +180,16 @@ const begin = async () => {
                         "span:not(:empty):has(a)"
                     );
                     if (mess.length == 3) {
-                        reference.dataref = decryption(mess[0]);
+                        reference.push[dataref, decryption(mess[0])];
                     }
                     else if (mess.length == 4) {
-                        reference.dataref = decryption(mess[1]);
+                        reference.push[dataref, decryption(mess[1])];
+                        // reference.dataref = decryption(mess[1]);
                     }
                     else if (mess.length == 5) {
                         decryption(mess[1]);
-                        reference.dataref = decryption(mess[2]);
+                        // reference.dataref = decryption(mess[2]);
+                        reference.push[dataref, decryption(mess[2])];
                     }
                     if (limess.length === 2 && dlsc) {
                         limess[1].childNodes.forEach((node) => {
