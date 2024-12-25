@@ -64,19 +64,55 @@ const verdict = async (val) => {
     return state[val];
 };
 
-console.log("cypher loaded");
+const deconstruct = (box) => {
+    paras = box.querySelectorAll("p");
+    let flat = "";
+    paras.forEach((para) => {
+        flat += `${para.textContent}\n`;
+    });
+    return flat;
+}
+
+const pushit = (mess) => {
+    setTimeout(() => {
+        document.execCommand("selectAll", false, null)
+        setTimeout(() => {
+            document.execCommand("insertText", false, `####${mess}`);
+        }, 100);
+    }, 100);
+}
+
+const linkage = (unlockedCypher) => {
+    const regex = /(\*[^*]+\*)|(_[^_]+_)|(`[^`]+`)|(?:https?:\/\/)?[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(:\d+)?(\/[^\s]*)?/g;
+
+    const result = unlockedCypher.replace(regex, (match) => {
+        if (match.startsWith('*')) {
+            return `<strong>${match.slice(1, -1)}</strong>`; // Bold
+        } else if (match.startsWith('_')) {
+            return `<em>${match.slice(1, -1)}</em>`; // Italic
+        } else if (match.startsWith('`')) {
+            return `<code>${match.slice(1, -1)}</code>`; // Inline code
+        } else if (match.startsWith('~')) {
+            return `<del>${match.slice(1, -1)}</del>`; // Inline code
+        } else {
+            return `<a href="${match.startsWith('http') ? match : 'http://' + match}">${match}</a>`; // Link
+        }
+    });
+    return result;
+
+}
+
+
 const begin = async () => {
-    const powersend = (func, link = false) => {
+    console.log("cypher loaded");
+    const powersend = (func) => {
         let mainEl = document.querySelector("#main");
         let sndiv = mainEl.querySelector('[aria-label="Send"]');
         let textarea = mainEl.querySelector('div[contenteditable="true"]');
-        let inp = textarea.textContent.trim();
+        // let inp = textarea.textContent.trim();
+        let inp = deconstruct(textarea)
         let mess;
         if (inp) {
-            if (inp.startsWith("@@")) {
-                inp = inp.slice(2);
-                link = true;
-            }
             let tab = document.querySelectorAll(
                 'div[style="transform: translateY(0px);"]'
             );
@@ -93,42 +129,37 @@ const begin = async () => {
 
             mess = encrypt(inp);
 
-            if (link) mess += "@@AA";
+            // if (link) mess += "@@AA";
 
             textarea.focus();
-            document.execCommand("selectAll", false, null);
-            document.execCommand("insertText", false, "####");
-            document.execCommand("selectAll", false, null);
-            document.execCommand("insertText", false, mess);
-            // textareaEl.dispatchEvent(new Event('change', { bubbles: true }))
+            pushit(mess);
             setTimeout(() => {
                 sndiv.click();
-            }, 200);
+            }, 300);
             setTimeout(func, 500);
         }
     };
 
     const manipulate = async () => {
-        console.log("manipulating started");
+        let mainEl = document.querySelector("#main");
+        if (mainEl.ariaLabel == "DARKNED")
+            return;
+        mainEl.ariaLabel = "DARKNED"
         let boxno = 0;
         const predecrypt = (x) => {
             if (x.startsWith("####")) {
-                if (x.endsWith("@@AA")) {
-                    x = decrypt(x.slice(4, -4));
-                    return `<a dir="auto" href="${x}" title="${x}" target="_blank">${x}</a>`;
-                }
 
-                return decrypt(x.slice(4));
+                return linkage(decrypt(x.slice(4)));
             }
-            return x;
+            return false;
         };
-        let mainEl = document.querySelector("#main");
         const decryptionprotocol = async () => {
             const dlsc = await verdict("DSEC");
             const deco = await verdict("DEC");
 
             const decryption = (x) => {
-                x.innerHTML = predecrypt(x.textContent);
+                const manval = predecrypt(x.textContent);
+                if (manval) x.innerHTML = manval;
             };
             if (deco) {
                 let messboxes = mainEl.querySelectorAll('div[role="row"]');
@@ -152,8 +183,15 @@ const begin = async () => {
                         decryption(mess[2]);
                     }
                     if (limess.length === 2 && dlsc) {
-                        limess[1].firstElementChild.textContent =
-                            "@DARKLORD SECURED";
+                        limess[1].childNodes.forEach((node) => {
+                            if (node.nodeName === "A") {
+                                node.innerHTML = "@DARKLORD SECURED";
+                            }
+                            if (node.nodeName === "#text") {
+                                node.nodeValue = " <-> ";
+                            }
+                        });
+                        ;
                         if (mess.length > 2) {
                             mess[0].parentElement.parentElement.parentElement.parentElement.remove();
                         }
@@ -194,8 +232,7 @@ const begin = async () => {
 
         decryptionprotocol();
         if (mainEl.querySelector("#powersend") === null) sendbutt();
-        mainEl
-            .querySelector('div[tabindex="-1"]')
+        mainEl.querySelector('div[tabindex="-1"]')
             .addEventListener("wheel", (eve) => {
                 if (eve.deltaY < 0)
                     if (
@@ -207,20 +244,22 @@ const begin = async () => {
             });
 
         let textarea = mainEl.querySelector('div[contenteditable="true"]');
-
+        let timer = true
         textarea.addEventListener("keydown", (event) => {
-            if (event.ctrlKey && event.key === " ") {
+            if (timer && event.ctrlKey && event.code === "Space") {
+                timer = false;
+                setTimeout(() => { timer = true }, 2000)
                 event.preventDefault();
                 powersend(decryptionprotocol);
             }
-            if (event.shiftKey && event.key === " ") {
-                event.preventDefault();
-                powersend(decryptionprotocol, true);
-            }
         });
+        setInterval(() => {
+            if (document.querySelector("#main")) {
+                decryptionprotocol();
+            }
+        }, 2000);
     };
     const archadd = () => {
-        console.log("archiving");
         document.querySelector("header").nextSibling;
         let arctab = document
             .querySelector("header")
@@ -229,12 +268,10 @@ const begin = async () => {
             conv.addEventListener("click", () => {
                 setTimeout(manipulate, 100);
             });
-            console.log("listening to archived convs");
         });
     };
 
-    const setup = () => {
-        console.log("setingup");
+    (() => {
         let convertab = document
             .querySelector("#side")
             .querySelectorAll('div[role="listitem"]');
@@ -246,12 +283,12 @@ const begin = async () => {
             .addEventListener("click", () => {
                 setTimeout(archadd, 1000);
             });
-    };
-    setup();
+
+    })();
     chrome.runtime.onMessage.addListener(
         async (request, sender, sendResponse) => {
             if (request.propagator === "MANP") {
-                manipulate();
+                decryptionprotocol();
             }
             return true;
         }
@@ -261,7 +298,6 @@ const begin = async () => {
 const cheak = () => {
     if (document.querySelector("#side")) {
         begin();
-        console.log("manupulator ready");
     } else {
         console.log("waiting for protocols");
         setTimeout(cheak, 2000);
@@ -269,4 +305,3 @@ const cheak = () => {
 };
 
 setTimeout(cheak, 6000);
-console.log("security on");
