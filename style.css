@@ -1,19 +1,106 @@
-button {
-    min-height: 30PX;
-    max-height: 40px;
-    width: 80%;
-    outline: none;
-    align-self: center;
-    margin: 5px;
-}
+/* Global Styles */
 body {
-    align-content: center;
+    font-family: 'Arial', sans-serif;
+    background-color: #121212;  /* Dark background color similar to WhatsApp Dark theme */
+    color: #e0e0e0;  /* Light text color for contrast */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
     align-items: center;
-    align-self: center;
-    
-    background-color: #000138;
-    color: aliceblue;
-    font-family: 'Roboto', sans-serif;
-    
-    
-}
+    height: 100vh;
+  }
+  
+  /* Container for centering the content */
+  .container {
+    text-align: center;
+    background-color: #1e1e1e;  /* Dark container background */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    width: 300px;
+    border: 1px solid #333;  /* Subtle border for depth */
+  }
+  
+  /* Heading Styles */
+  h1 {
+    font-size: 24px;
+    color: #25d366;  /* WhatsApp Green */
+    margin-bottom: 20px;
+  }
+  
+  /* Button Styles */
+  button {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s, transform 0.2s;
+    color: black;
+  }
+  
+  button:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Button Colors */
+  .primary {
+    background-color: #25d366;
+    color: black;  /* WhatsApp Green */
+  }
+  
+  .secondary {
+    background-color: #777;  /* Grayish button for secondary actions */
+  }
+  
+  .danger {
+    background-color: #f44336;  /* Red for danger actions */
+  }
+  
+  .warning {
+    background-color: #ff9800;  /* Orange for warning actions */
+  }
+  
+  /* Input Field Styling */
+  input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #555;
+    border-radius: 5px;
+    background-color: #333;
+    color: #e0e0e0;
+    font-size: 16px;
+  }
+  
+  /* Placeholder styling */
+  input[type="text"]::placeholder {
+    color: #aaa;
+  }
+  
+  /* Horizontal Rule Styles */
+  hr {
+    border: 0;
+    border-top: 1px solid #444;  /* Lighter gray to match dark theme */
+    margin: 10px 0;
+  }
+  
+  .credits {
+    font-size: 14px;
+    color: #aaa;  /* Light gray text for credits */
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  .credits a {
+    color: #25d366;  /* WhatsApp Green for the link */
+    text-decoration: none;  /* Remove underline from the link */
+  }
+  
+  .credits a:hover {
+    text-decoration: underline;  /* Add underline on hover for the link */
+  }
+  
